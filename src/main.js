@@ -1,7 +1,7 @@
 const game = new Phaser.Game({
   type: Phaser.AUTO,
-  width: 640,
-  height: 480,
+  width: 800,
+  height: 600,
   physics: {
     default: 'arcade',
     arcade: {
