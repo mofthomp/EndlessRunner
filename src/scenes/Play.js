@@ -13,6 +13,9 @@ class Play extends Phaser.Scene {
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyJump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        keyLeftArrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        keyRightArrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
 
         this.add.text(
             game.config.width / 2, 

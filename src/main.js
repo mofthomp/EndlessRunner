@@ -12,7 +12,7 @@ const game = new Phaser.Game({
   scene: [Menu, Play]
 })
 
-let keyQ, keyLeft, keyRight, keyJump;
+let keyQ, keyLeft, keyRight, keyJump, keyLeftArrow, keyRightArrow, keyUp;
 
 /* Remove context menu. */
 document.addEventListener('contextmenu', (e) => {
