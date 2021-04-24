@@ -4,7 +4,7 @@ class load extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('player', './assets/player.png');
+        this.load.atlas('player', 'assets/spritesheet.png', 'assets/spritesheet.json')
         this.load.image('ground', './assets/ground.png');
         this.load.image('tentacle1', './assets/tentacle1.png');
         this.load.image('tentacle2', './assets/tentacle2.png');

@@ -4,6 +4,37 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+        this.anims.create({
+            key: 'player_run',
+            frames: this.anims.generateFrameNames('player', {
+                start: 1,
+                end: 6,
+                prefix: 'run_'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'player_jump',
+            frames: this.anims.generateFrameNames('player', {
+                start: 1,
+                end: 3,
+                prefix: 'jump_'
+            }),
+            frameRate: 15,
+        })
+
+        this.anims.create({
+            key: 'player_fall',
+            frames: this.anims.generateFrameNames('player', {
+                start: 1,
+                end: 2,
+                prefix: 'fall_'
+            }),
+            frameRate: 15,
+        })
+
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyJump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);

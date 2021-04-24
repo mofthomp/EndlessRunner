@@ -13,6 +13,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
+        // Play the run animation. */
+        if (this.body.touching.down) {
+          this.play('player_run', true)
+        } else if (this.body.velocity.y > 100) {
+          this.play('player_fall')
+        }
+
         this.setAccelerationX(0)
         if(keyLeft.isDown || keyLeftArrow.isDown) {
             if(this.body.velocity.x > 0) {
@@ -33,6 +40,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             }
         }
         if((keyJump.isDown || keyUp.isDown) && this.body.touching.down) {
+            // Play jump animation.
+            this.play('player_jump')
             this.setVelocityY(-500);
         }
     }
