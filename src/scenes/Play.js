@@ -69,6 +69,14 @@ class Play extends Phaser.Scene {
         this.foreground.tilePositionX += 5;
         this.background.tilePositionX += 2;
         this.ground.tilePositionX += 2;
+
+        // Kill the player if they go out of bounds.
+        if (
+            this.player.x > game.config.width + this.player.width / 2 ||
+            this.player.x < -this.player.width / 2
+        ) {
+            this.killPlayer()
+        }
     }
 
     killPlayer () {
