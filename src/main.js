@@ -5,11 +5,11 @@ const game = new Phaser.Game({
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 300 },
+      gravity: { y: 0 },
       debug: false
     }
   },
-  scene: [Menu, Play]
+  scene: [load, Menu, Play]
 })
 
 let keyQ, keyLeft, keyRight, keyJump, keyLeftArrow, keyRightArrow, keyUp;

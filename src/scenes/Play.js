@@ -3,12 +3,6 @@ class Play extends Phaser.Scene {
         super('playScene');
     }
 
-    preload() {
-        //temp player image
-        this.load.image('player', './assets/player.png');
-        this.load.image('ground', './assets/ground.png')
-    }
-
     create() {
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -17,11 +11,27 @@ class Play extends Phaser.Scene {
         keyRightArrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
 
+        this.background = this.add.tileSprite(
+            0,
+            0,
+            game.config.width,
+            game.config.height,
+            'background'
+        ).setOrigin(0, 0);
+
         this.add.text(
             game.config.width / 2, 
             20, 
             'This is the play scene'
         ).setOrigin(0.5);
+
+        this.foreground = this.add.tileSprite(
+            0,
+            0,
+            game.config.width,
+            game.config.height,
+            'foreground'
+        ).setOrigin(0, 0);
 
         //change to sprite if ground needs to be animated
         this.ground = this.physics.add.image(
@@ -40,18 +50,32 @@ class Play extends Phaser.Scene {
         )
 
         this.physics.add.collider(this.ground, this.player);
+
+        this.allObstacles = this.add.group({
+            runChildUpdate: true
+        });
+
+        this.obstacleTimer = this.time.addEvent({
+            delay: 2000,
+            callback: this.generateObstacle,
+            callbackScope: this,
+            loop: true
+        });
     }
 
     update() {
         this.player.update();
-        // if(keyLeft.isDown) {
-        //     console.log('pressing A');
-        // }
-        // if(keyRight.isDown) {
-        //     console.log('pressing D');
-        // }
-        // if(keyJump.isDown) {
-        //     console.log('pressing Jump');
-        // }
+
+        this.foreground.tilePositionX += 5;
+        this.background.tilePositionX += 2;
+    }
+
+    generateObstacle() {
+        let obstacle = new Obstacle(this);
+
+        //uncomment this so the player can collide with the obstacle
+        //this.physics.add.collider(this.player, obstacle);
+        this.allObstacles.add(obstacle);
+        console.log(obstacle);
     }
 }
