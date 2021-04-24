@@ -38,8 +38,8 @@ class Play extends Phaser.Scene {
             game.config.width / 2,
             game.config.height,
             'ground'
-        );
-        this.ground.setCollideWorldBounds(true);
+        ).setOrigin(0.5,1.0);
+        this.ground.setImmovable(true);
 
         this.player = new Player(
             this,
@@ -68,6 +68,11 @@ class Play extends Phaser.Scene {
 
         this.foreground.tilePositionX += 5;
         this.background.tilePositionX += 2;
+        this.ground.tilePositionX += 2;
+    }
+
+    killPlayer () {
+        this.scene.start('loseScene')
     }
 
     generateObstacle() {
@@ -75,6 +80,9 @@ class Play extends Phaser.Scene {
 
         //uncomment this so the player can collide with the obstacle
         //this.physics.add.collider(this.player, obstacle);
+        this.physics.add.overlap(this.player, obstacle, () => {
+          this.killPlayer()
+        })
         this.allObstacles.add(obstacle);
         console.log(this.allObstacles);
     }
