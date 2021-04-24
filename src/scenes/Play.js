@@ -72,6 +72,16 @@ class Play extends Phaser.Scene {
         ).setOrigin(0.5,1.0);
         this.ground.body.allowGravity = false
         this.ground.setImmovable(true);
+        
+        // Add tile sprite in front of ground. Why is there no way to just add a
+        // tile sprite? Idk
+        this.groundSprite = this.add.tileSprite(
+            game.config.width / 2,
+            game.config.height,
+            game.config.width,
+            this.ground.height,
+            'ground'
+        ).setOrigin(0.5,1.0);
 
         this.player = new Player(
             this,
@@ -98,9 +108,9 @@ class Play extends Phaser.Scene {
     update() {
         this.player.update();
 
-        this.foreground.tilePositionX += 5;
-        this.background.tilePositionX += 2;
-        this.ground.tilePositionX += 2;
+        this.foreground.tilePositionX -= 7;
+        this.background.tilePositionX -= 6;
+        this.groundSprite.tilePositionX -= 5;
 
         // Kill the player if they go out of bounds.
         if (
