@@ -44,7 +44,7 @@ class Play extends Phaser.Scene {
         this.player = new Player(
             this,
             game.config.width / 2,
-            game.config.height / 2,
+            400,
             'player',
             0
         )
@@ -76,6 +76,6 @@ class Play extends Phaser.Scene {
         //uncomment this so the player can collide with the obstacle
         //this.physics.add.collider(this.player, obstacle);
         this.allObstacles.add(obstacle);
-        console.log(obstacle);
+        console.log(this.allObstacles);
     }
 }

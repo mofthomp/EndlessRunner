@@ -5,7 +5,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.setCollideWorldBounds(true);
-        this.setGravityY(300);
+        this.setGravityY(600);
         this.jumping = false;
         this.body.useDamping = true;
         this.setDragX(0.1);
@@ -16,18 +16,28 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.setAccelerationX(0)
         if(keyLeft.isDown || keyLeftArrow.isDown) {
             if(this.body.velocity.x > 0) {
-                this.setVelocityX(0);
+                this.body.velocity.x -= this.checkVelo(this.body.velocity.x);
+            } else {
+                if(Math.abs(this.body.velocity.x) < playerMaxSpeed) {
+                    this.body.velocity.x -= 40;
+                }
             }
-            this.setAccelerationX(-100);
         }
         if(keyRight.isDown || keyRightArrow.isDown) {
             if(this.body.velocity.x < 0) {
-                this.setVelocityX(0);
+                this.body.velocity.x += this.checkVelo(this.body.velocity.x);
+            } else {
+                if(Math.abs(this.body.velocity.x) < playerMaxSpeed) {
+                    this.body.velocity.x += 40;
+                }
             }
-            this.setAccelerationX(100);
         }
         if((keyJump.isDown || keyUp.isDown) && this.body.touching.down) {
-            this.setVelocityY(-200);
+            this.setVelocityY(-500);
         }
+    }
+
+    checkVelo(veloX) {
+        return (Math.abs(veloX) > 30) ? 30 : Math.abs(veloX);
     }
 }
