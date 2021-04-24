@@ -7,6 +7,7 @@ class Obstacle extends Phaser.Physics.Arcade.Sprite {
 
         //change this to change speed
         this.setVelocityX(300);
+        this.body.allowGravity = false
         this.setImmovable();
     }
 

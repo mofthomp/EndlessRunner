@@ -70,6 +70,7 @@ class Play extends Phaser.Scene {
             game.config.height,
             'ground'
         ).setOrigin(0.5,1.0);
+        this.ground.body.allowGravity = false
         this.ground.setImmovable(true);
 
         this.player = new Player(

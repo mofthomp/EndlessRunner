@@ -5,7 +5,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
         //this.setCollideWorldBounds(true);
-        this.setGravityY(600);
         this.jumping = false;
         this.body.useDamping = true;
         this.setDragX(0.1);
@@ -43,6 +42,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             // Play jump animation.
             this.play('player_jump')
             this.setVelocityY(-500);
+        }
+
+        // Add a slight amount of extra gravity as the player falls.
+        if (this.body.velocity.y > 0) {
+          this.body.velocity.y += 10
         }
     }
 
