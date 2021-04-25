@@ -67,7 +67,7 @@ class Play extends Phaser.Scene {
         //change to sprite if ground needs to be animated
         this.ground = this.physics.add.image(
             game.config.width / 2,
-            game.config.height,
+            game.config.height + 4,
             'ground'
         ).setOrigin(0.5,1.0);
         this.ground.body.allowGravity = false
@@ -98,9 +98,12 @@ class Play extends Phaser.Scene {
         });
 
         this.obstacleTimer = this.time.addEvent({
-            delay: 2000,
-            callback: this.generateObstacle,
-            callbackScope: this,
+            delay: 1000,
+            callback: () => {
+                if (Math.random() < 0.25) {
+                    this.generateObstacle()
+                }
+            },
             loop: true
         });
     }
@@ -131,7 +134,7 @@ class Play extends Phaser.Scene {
         //uncomment this so the player can collide with the obstacle
         //this.physics.add.collider(this.player, obstacle);
         this.physics.add.overlap(this.player, obstacle, () => {
-          this.killPlayer()
+            this.killPlayer()
         })
         this.allObstacles.add(obstacle);
         console.log(this.allObstacles);
