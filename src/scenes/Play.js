@@ -15,6 +15,12 @@ class Play extends Phaser.Scene {
             repeat: -1
         })
 
+        this.sound.stopAll();
+        this.playMusic = this.sound.add('bgm_play', {
+            loop: true
+        });
+        this.playMusic.play();
+
         this.anims.create({
             key: 'player_jump',
             frames: this.anims.generateFrameNames('player', {

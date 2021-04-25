@@ -11,6 +11,10 @@ class Lose extends Phaser.Scene {
             fontSize: '28px',
             fixedWidth: 0
         }
+
+        this.sound.stopAll();
+        this.sound.play('bgm_death');
+
         this.add.text(
             game.config.width / 2, 
             game.config.height / 2, 
