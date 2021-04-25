@@ -5,7 +5,7 @@ class Lose extends Phaser.Scene {
 
     create() {
         keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
-
+        keyQ_dv = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.QUOTES);
         let menuConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
@@ -30,7 +30,7 @@ class Lose extends Phaser.Scene {
     }
 
     update() {
-        if(Phaser.Input.Keyboard.JustDown(keyQ)) {
+        if(Phaser.Input.Keyboard.JustDown(keyQ) || Phaser.Input.Keyboard.JustDown(keyQ_dv)) {
             game.settings = {
                 obstacleSpeed: 500
             }
