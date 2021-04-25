@@ -1,6 +1,6 @@
 class Obstacle extends Phaser.Physics.Arcade.Sprite {
     constructor(scene) {
-        super(scene, -128, 460, ((Math.random() * 10) % 2) ? 'tentacle1' : 'tentacle2');
+        super(scene, -128, 480, ((Math.random() * 10) % 2) ? 'tentacle1' : 'tentacle2');
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
