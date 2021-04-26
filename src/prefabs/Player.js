@@ -59,16 +59,16 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         if (this.cooldown <= 0) {
             this.cooldownIndicator.visible = false
-            if (Phaser.Input.Keyboard.JustDown(keyF)) {
-                this.fire()
+            if (Phaser.Input.Keyboard.JustDown(keyF) || Phaser.Input.Keyboard.JustDown(keyF_dv)) {
+                this.fire();
             }
         } else {
-            this.cooldownIndicator.visible = true
-            this.cooldown -= dt
-            this.cooldownIndicator.text = (this.cooldown / 1000).toFixed(2)
+            this.cooldownIndicator.visible = true;
+            this.cooldown -= dt;
+            this.cooldownIndicator.text = (this.cooldown / 1000).toFixed(2);
         }
-        this.cooldownIndicator.x = this.x
-        this.cooldownIndicator.y = this.y - 64
+        this.cooldownIndicator.x = this.x;
+        this.cooldownIndicator.y = this.y - 64;
     }
 
     checkVelo(veloX) {
@@ -76,7 +76,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     fire () {
-        new Projectile(this.scene, this.x, this.y)
-        this.cooldown = this.maxCooldown
+        new Projectile(this.scene, this.x, this.y);
+        this.cooldown = this.maxCooldown;
     }
 }

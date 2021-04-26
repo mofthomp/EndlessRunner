@@ -12,7 +12,7 @@ const game = new Phaser.Game({
   scene: [load, Menu, Play, Lose, Credits, Tutorial]
 })
 
-let keyQ, keyQ_dv, keyLeft, keyRight, keyJump, keyLeftArrow, keyRightArrow, keyUp, keyF;
+let keyQ, keyQ_dv, keyLeft, keyRight, keyJump, keyLeftArrow, keyRightArrow, keyUp, keyF, keyF_dv;
 const playerMaxSpeed = 300;
 
 /* Remove context menu. */
