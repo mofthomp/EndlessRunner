@@ -110,7 +110,7 @@ class Play extends Phaser.Scene {
         })
 
         this.obstacleTimer = this.time.addEvent({
-            delay: 1000,
+            delay: 500,
             callback: () => {
                 if (Math.random() < 0.25) {
                     this.generateObstacle()
@@ -120,8 +120,8 @@ class Play extends Phaser.Scene {
         });
     }
 
-    update() {
-        this.player.update();
+    update(t, dt) {
+        this.player.update(t, dt);
 
         this.foreground.tilePositionX -= 7;
         this.background.tilePositionX -= 6;
