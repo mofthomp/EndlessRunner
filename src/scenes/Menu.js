@@ -4,9 +4,9 @@ class Menu extends Phaser.Scene {
     }
 
     preload(){
-        this.load.audio('bgm_sting', './assets/intro_sting.wav');
-        this.load.audio('bgm_play', './assets/chase_theme.wav');
-        this.load.audio('bgm_death', './assets/death_jingle.wav');
+        this.load.audio('bgm_sting', './assets/intro_sting.mp3');
+        this.load.audio('bgm_play', './assets/chase_theme.mp3');
+        this.load.audio('bgm_death', './assets/death_jingle.mp3');
     }
 
     create() {
