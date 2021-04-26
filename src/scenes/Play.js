@@ -41,6 +41,8 @@ class Play extends Phaser.Scene {
             frameRate: 15,
         })
 
+
+        keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyJump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -103,6 +105,10 @@ class Play extends Phaser.Scene {
             runChildUpdate: true
         });
 
+        this.allProjectiles = this.add.group({
+            runChildUpdate: true
+        })
+
         this.obstacleTimer = this.time.addEvent({
             delay: 1000,
             callback: () => {
@@ -128,6 +134,8 @@ class Play extends Phaser.Scene {
         ) {
             this.killPlayer()
         }
+
+        this.explodeParticles = this.add.particles('soft')
     }
 
     killPlayer () {
@@ -143,6 +151,5 @@ class Play extends Phaser.Scene {
             this.killPlayer()
         })
         this.allObstacles.add(obstacle);
-        console.log(this.allObstacles);
     }
 }

@@ -1,5 +1,5 @@
 const game = new Phaser.Game({
-  type: Phaser.CANVAS,
+  type: Phaser.AUTO,
   width: 800,
   height: 600,
   physics: {
@@ -12,7 +12,7 @@ const game = new Phaser.Game({
   scene: [load, Menu, Play, Lose]
 })
 
-let keyQ, keyQ_dv, keyLeft, keyRight, keyJump, keyLeftArrow, keyRightArrow, keyUp;
+let keyQ, keyQ_dv, keyLeft, keyRight, keyJump, keyLeftArrow, keyRightArrow, keyUp, keyF;
 const playerMaxSpeed = 300;
 
 /* Remove context menu. */

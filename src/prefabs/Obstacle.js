@@ -4,6 +4,7 @@ class Obstacle extends Phaser.Physics.Arcade.Sprite {
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
+        this.scene = scene
 
         //change this to change speed
         this.setVelocityX(300);
@@ -16,5 +17,10 @@ class Obstacle extends Phaser.Physics.Arcade.Sprite {
         if(this.x > (game.config.width + this.width)) {
             this.destroy();
         }
+    }
+
+    takeDamage () {
+        makeExplodeParticles(this.x, this.y, this.scene.explodeParticles)
+        this.destroy()
     }
 }

@@ -9,6 +9,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.body.useDamping = true;
         this.setDragX(0.1);
         this.gameOver = false
+        this.scene = scene
     }
 
     update() {
@@ -48,9 +49,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if (this.body.velocity.y > 0) {
           this.body.velocity.y += 10
         }
+
+        if (Phaser.Input.Keyboard.JustDown(keyF)) {
+            this.fire()
+        }
     }
 
     checkVelo(veloX) {
         return (Math.abs(veloX) > 30) ? 30 : Math.abs(veloX);
+    }
+
+    fire () {
+        new Projectile(this.scene, this.x, this.y)
     }
 }
