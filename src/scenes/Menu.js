@@ -10,8 +10,8 @@ class Menu extends Phaser.Scene {
     }
 
     create() {
-        keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
-        keyQ_dv = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.QUOTES);
+        keyLeftArrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        keyRightArrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         let menuConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
@@ -29,17 +29,20 @@ class Menu extends Phaser.Scene {
         this.add.text(
             game.config.width / 2, 
             game.config.height / 2 + 50, 
-            'Press Q to Start',
+            'Press -> to Start or <- for Credits',
             menuConfig
         ).setOrigin(0.5);
     }
 
     update() {
-        if(Phaser.Input.Keyboard.JustDown(keyQ) || Phaser.Input.Keyboard.JustDown(keyQ_dv)) {
-            game.settings = {
+        if(Phaser.Input.Keyboard.JustDown(keyRightArrow)) {
+            /*game.settings = {
                 obstacleSpeed: 500
-            }
-            this.scene.start('playScene');
+            }*/
+            this.scene.start('tutScene');
+        }
+        if(Phaser.Input.Keyboard.JustDown(keyLeftArrow)) {
+            this.scene.start('creditScene');
         }
     }
 }

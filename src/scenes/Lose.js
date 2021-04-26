@@ -4,8 +4,8 @@ class Lose extends Phaser.Scene {
     }
 
     create() {
-        keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
-        keyQ_dv = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.QUOTES);
+        keyLeftArrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        keyRightArrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         let menuConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
@@ -24,17 +24,20 @@ class Lose extends Phaser.Scene {
         this.add.text(
             game.config.width / 2, 
             game.config.height / 2 + 50, 
-            'Press Q to restart',
+            'Press -> to Restart or <- for Menu',
             menuConfig
         ).setOrigin(0.5);
     }
 
     update() {
-        if(Phaser.Input.Keyboard.JustDown(keyQ) || Phaser.Input.Keyboard.JustDown(keyQ_dv)) {
+        if(Phaser.Input.Keyboard.JustDown(keyRightArrow)) {
             game.settings = {
                 obstacleSpeed: 500
             }
             this.scene.start('playScene');
+        }
+        if(Phaser.Input.Keyboard.JustDown(keyLeftArrow)) {
+            this.scene.start('menuScene');
         }
     }
 }
