@@ -10,9 +10,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.setDragX(0.1);
         this.gameOver = false
         this.scene = scene
+
+        /* How many milliseconds before you can shoot again. */
+        this.maxCooldown = 5000
+        this.cooldown = 0
     }
 
-    update() {
+    update(t, dt) {
         // Play the run animation. */
         if (this.body.touching.down) {
           this.play('player_run', true)
@@ -50,8 +54,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
           this.body.velocity.y += 10
         }
 
-        if (Phaser.Input.Keyboard.JustDown(keyF)) {
-            this.fire()
+        if (this.cooldown <= 0) {
+            if (Phaser.Input.Keyboard.JustDown(keyF)) {
+                this.fire()
+            }
+        } else {
+            this.cooldown -= dt
         }
     }
 
@@ -61,5 +69,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     fire () {
         new Projectile(this.scene, this.x, this.y)
+        this.cooldown = this.maxCooldown
     }
 }
