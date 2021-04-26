@@ -4,6 +4,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
+
+        this.cooldownIndicator = scene.add.text(x, y, '').setOrigin(0.5, 0.5)
+
         //this.setCollideWorldBounds(true);
         this.jumping = false;
         this.body.useDamping = true;
@@ -55,12 +58,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         if (this.cooldown <= 0) {
+            this.cooldownIndicator.visible = false
             if (Phaser.Input.Keyboard.JustDown(keyF)) {
                 this.fire()
             }
         } else {
+            this.cooldownIndicator.visible = true
             this.cooldown -= dt
+            this.cooldownIndicator.text = (this.cooldown / 1000).toFixed(2)
         }
+        this.cooldownIndicator.x = this.x
+        this.cooldownIndicator.y = this.y - 64
     }
 
     checkVelo(veloX) {
