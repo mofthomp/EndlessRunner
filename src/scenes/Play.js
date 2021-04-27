@@ -4,6 +4,8 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+
+
         this.anims.create({
             key: 'player_run',
             frames: this.anims.generateFrameNames('player', {
@@ -43,7 +45,7 @@ class Play extends Phaser.Scene {
 
 
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
-        keyF_dv = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Y);
+        keyF_dv = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
         keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyJump = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -119,6 +121,26 @@ class Play extends Phaser.Scene {
             },
             loop: true
         });
+
+      
+        //let timeScore = this.time.now; -- this is for changing difficulty later
+
+        //display time
+        let timeConfig = {
+            fontFamily: 'Comic Sans MS',
+            fontSize: '100 px',
+            backgroundColor: '#000000',
+            color: '#FFFFFF',
+            align: 'center',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 200
+            }
+        
+        this.timeDisplay = this.add.text(10, 10, 'Timer: ' + Math.round(this.time.now/1000, timeConfig));
+        
     }
 
     update(t, dt) {
@@ -136,7 +158,10 @@ class Play extends Phaser.Scene {
             this.killPlayer()
         }
 
-        this.explodeParticles = this.add.particles('soft')
+        this.explodeParticles = this.add.particles('soft');
+
+       //update clock
+        this.timeDisplay.text = 'Timer: ' + this.time.now/1000;
     }
 
     killPlayer () {
