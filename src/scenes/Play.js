@@ -115,7 +115,7 @@ class Play extends Phaser.Scene {
         const addObstacleTimer = () => {
             const min = Math.max(2000 - this.playTime.inSeconds() * 8, 250)
             const scale = Math.max(4000 - this.playTime.inSeconds() * 16, 250)
-            console.log(min, scale)
+            //console.log(min, scale)
             const e = this.time.addEvent({
                 delay: Math.random() * scale + min,
                 callback: () => {
@@ -170,7 +170,7 @@ class Play extends Phaser.Scene {
     }
 
     killPlayer () {
-        this.scene.start('loseScene')
+        this.scene.start('loseScene');
     }
 
     generateObstacle() {
