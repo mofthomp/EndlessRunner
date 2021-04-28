@@ -112,15 +112,16 @@ class Play extends Phaser.Scene {
             runChildUpdate: true
         })
 
-        this.obstacleTimer = this.time.addEvent({
-            delay: 500,
-            callback: () => {
-                if (Math.random() < 0.25) {
+        const addObstacleTimer = () => {
+            this.time.addEvent({
+                delay: Math.random() * 2000 + 250,
+                callback: () => {
                     this.generateObstacle()
+                    addObstacleTimer()
                 }
-            },
-            loop: true
-        });
+            });
+        }
+        addObstacleTimer()
 
       
         //let timeScore = this.time.now; -- this is for changing difficulty later
