@@ -4,7 +4,7 @@ class Play extends Phaser.Scene {
     }
 
     create() {
-
+        this.playTime = stopwatch()
 
         this.anims.create({
             key: 'player_run',
@@ -112,15 +112,20 @@ class Play extends Phaser.Scene {
             runChildUpdate: true
         })
 
-        this.obstacleTimer = this.time.addEvent({
-            delay: 500,
-            callback: () => {
-                if (Math.random() < 0.25) {
+        const addObstacleTimer = () => {
+            const min = Math.max(2000 - this.playTime.inSeconds() * 8, 250)
+            const scale = Math.max(4000 - this.playTime.inSeconds() * 16, 250)
+            console.log(min, scale)
+            const e = this.time.addEvent({
+                delay: Math.random() * scale + min,
+                callback: () => {
                     this.generateObstacle()
+                    addObstacleTimer()
+                    this.time.removeEvent(e)
                 }
-            },
-            loop: true
-        });
+            });
+        }
+        addObstacleTimer()
 
       
         //let timeScore = this.time.now; -- this is for changing difficulty later
@@ -137,10 +142,9 @@ class Play extends Phaser.Scene {
                 bottom: 5,
             },
             fixedWidth: 200
-            }
+        }
         
-        this.timeDisplay = this.add.text(10, 10, 'Timer: ' + Math.round(this.time.now/1000, timeConfig));
-        
+        this.timeDisplay = this.add.text(10, 10, 'Timer: 0', timeConfig)
     }
 
     update(t, dt) {
@@ -160,8 +164,9 @@ class Play extends Phaser.Scene {
 
         this.explodeParticles = this.add.particles('soft');
 
-       //update clock
-        this.timeDisplay.text = 'Timer: ' + this.time.now/1000;
+        //update clock
+        this.playTime.addMilliseconds(dt)
+        this.timeDisplay.text = `Timer: ${this.playTime.inSeconds().toFixed(2)}`;
     }
 
     killPlayer () {
@@ -169,7 +174,7 @@ class Play extends Phaser.Scene {
     }
 
     generateObstacle() {
-        let obstacle = new Obstacle(this);
+        const obstacle = new Obstacle(this);
 
         //uncomment this so the player can collide with the obstacle
         //this.physics.add.collider(this.player, obstacle);
