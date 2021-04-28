@@ -22,3 +22,24 @@ function makeExplodeParticles (x, y, particles) {
         y
     )
 }
+
+function stopwatch () {
+    let time = 0
+    return {
+        inSeconds () {
+            return time / 1000
+        },
+        inMilliseconds () {
+            return time
+        },
+        addSeconds (dt) {
+            time += dt * 1000
+        },
+        addMilliseconds (dt) {
+            time += dt
+        },
+        clear () {
+            time = 0
+        }
+    }
+}

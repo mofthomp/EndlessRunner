@@ -4,7 +4,7 @@ class Play extends Phaser.Scene {
     }
 
     create() {
-        this.currentPlayTime = 0
+        this.playTime = stopwatch()
 
         this.anims.create({
             key: 'player_run',
@@ -113,11 +113,15 @@ class Play extends Phaser.Scene {
         })
 
         const addObstacleTimer = () => {
-            this.time.addEvent({
-                delay: Math.random() * 2000 + 500,
+            const min = Math.max(2000 - this.playTime.inSeconds() * 8, 250)
+            const scale = Math.max(4000 - this.playTime.inSeconds() * 16, 250)
+            console.log(min, scale)
+            const e = this.time.addEvent({
+                delay: Math.random() * scale + min,
                 callback: () => {
                     this.generateObstacle()
                     addObstacleTimer()
+                    this.time.removeEvent(e)
                 }
             });
         }
@@ -161,15 +165,8 @@ class Play extends Phaser.Scene {
         this.explodeParticles = this.add.particles('soft');
 
         //update clock
-        this.currentPlayTime += dt
-        this.timeDisplay.text = `Timer: ${this.getTimeInSeconds().toFixed(2)}`;
-    }
-
-    /**
-     * Returns the time in seconds since the scene was started.
-     */
-    getTimeInSeconds () {
-        return (this.currentPlayTime / 1000)
+        this.playTime.addMilliseconds(dt)
+        this.timeDisplay.text = `Timer: ${this.playTime.inSeconds().toFixed(2)}`;
     }
 
     killPlayer () {
@@ -177,7 +174,7 @@ class Play extends Phaser.Scene {
     }
 
     generateObstacle() {
-        let obstacle = new Obstacle(this);
+        const obstacle = new Obstacle(this);
 
         //uncomment this so the player can collide with the obstacle
         //this.physics.add.collider(this.player, obstacle);
