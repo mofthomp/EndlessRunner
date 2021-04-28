@@ -4,7 +4,7 @@ class Play extends Phaser.Scene {
     }
 
     create() {
-
+        this.currentPlayTime = 0
 
         this.anims.create({
             key: 'player_run',
@@ -114,7 +114,7 @@ class Play extends Phaser.Scene {
 
         const addObstacleTimer = () => {
             this.time.addEvent({
-                delay: Math.random() * 2000 + 250,
+                delay: Math.random() * 2000 + 500,
                 callback: () => {
                     this.generateObstacle()
                     addObstacleTimer()
@@ -138,10 +138,9 @@ class Play extends Phaser.Scene {
                 bottom: 5,
             },
             fixedWidth: 200
-            }
+        }
         
-        this.timeDisplay = this.add.text(10, 10, 'Timer: ' + Math.round(this.time.now/1000, timeConfig));
-        
+        this.timeDisplay = this.add.text(10, 10, 'Timer: 0', timeConfig)
     }
 
     update(t, dt) {
@@ -161,8 +160,16 @@ class Play extends Phaser.Scene {
 
         this.explodeParticles = this.add.particles('soft');
 
-       //update clock
-        this.timeDisplay.text = 'Timer: ' + this.time.now/1000;
+        //update clock
+        this.currentPlayTime += dt
+        this.timeDisplay.text = `Timer: ${this.getTimeInSeconds().toFixed(2)}`;
+    }
+
+    /**
+     * Returns the time in seconds since the scene was started.
+     */
+    getTimeInSeconds () {
+        return (this.currentPlayTime / 1000)
     }
 
     killPlayer () {
