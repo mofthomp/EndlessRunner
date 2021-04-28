@@ -5,7 +5,7 @@ class Tutorial extends Phaser.Scene {
 
     create() {
         keyRightArrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-        let menuConfig = {
+        /*let menuConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
             fixedWidth: 0
@@ -15,7 +15,8 @@ class Tutorial extends Phaser.Scene {
             game.config.height / 2, 
             'Press -> to Begin',
             menuConfig
-        ).setOrigin(0.5);
+        ).setOrigin(0.5);*/
+        this.background = this.add.tileSprite(0, 0, 800, 600, 'tut').setOrigin(0,0);
         
     }
 

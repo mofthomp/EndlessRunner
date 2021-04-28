@@ -11,6 +11,7 @@ class load extends Phaser.Scene {
         this.load.image('tentacle2', './assets/tentacle2.png');
         this.load.image('background', './assets/bg.png');
         this.load.image('foreground', './assets/foreground.png');
+        this.load.image('tut', './assets/tut1.png');
     }
 
     create() {
