@@ -61,12 +61,6 @@ class Play extends Phaser.Scene {
             'background'
         ).setOrigin(0, 0);
 
-        this.add.text(
-            game.config.width / 2, 
-            20, 
-            'This is the play scene'
-        ).setOrigin(0.5);
-
         this.foreground = this.add.tileSprite(
             0,
             0,
