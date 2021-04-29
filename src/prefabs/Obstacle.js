@@ -10,6 +10,8 @@ class Obstacle extends Phaser.Physics.Arcade.Sprite {
         this.setVelocityX(300);
         this.body.allowGravity = false
         this.setImmovable();
+        /* Adjust physics size. */
+        this.setSize(this.width / 2, this.height - 4)
 
         this.animation = ['tentacles1', 'tentacles2'][Math.round(Math.random())]
     }
