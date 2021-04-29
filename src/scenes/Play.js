@@ -192,7 +192,9 @@ class Play extends Phaser.Scene {
     }
 
     killPlayer () {
-        this.scene.start('loseScene');
+        this.scene.start('loseScene', {
+            playTimeInMilliseconds: this.playTime.inMilliseconds()
+        })
     }
 
     generateObstacle() {

@@ -3,10 +3,8 @@ class Lose extends Phaser.Scene {
         super('loseScene');
     }
 
-    create() {
-        
-        /*keyLeftArrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        keyRightArrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);*/
+    create (data) {
+        const { playTimeInMilliseconds } = data
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyF_dv = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
         keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
@@ -20,6 +18,11 @@ class Lose extends Phaser.Scene {
         this.sound.stopAll();
         this.sound.play('bgm_death');
 
+        /* Update high score. */
+        if (playTimeInMilliseconds > getHighScore()) {
+            setHighScore(playTimeInMilliseconds)
+        }
+
         this.add.text(
             game.config.width / 2, 
             game.config.height / 2, 
@@ -29,11 +32,21 @@ class Lose extends Phaser.Scene {
         this.add.text(
             game.config.width / 2, 
             game.config.height / 2 + 50, 
+            'Your score: ' + formatTime(playTimeInMilliseconds),
+            menuConfig
+        ).setOrigin(0.5);
+        this.add.text(
+            game.config.width / 2, 
+            game.config.height / 2 + 100, 
+            'Your best score: ' + formatTime(getHighScore()),
+            menuConfig
+        ).setOrigin(0.5);
+        this.add.text(
+            game.config.width / 2, 
+            game.config.height / 2 + 150, 
             'Press Q to Restart or F for Menu',
             menuConfig
         ).setOrigin(0.5);
-
-
     }
 
     update() {

@@ -23,9 +23,16 @@ function makeExplodeParticles (x, y, particles) {
     )
 }
 
+function formatTime (milliseconds) {
+    const padNum = (x, amount) => x.toString().padStart(amount, '0')
+    const minutes = Math.floor(milliseconds / (1000 * 60))
+    const seconds = (milliseconds - minutes * 60 * 1000) / (1000)
+    return padNum(minutes, 2) + ':' + padNum(seconds.toFixed(2), 5)
+}
+
 function stopwatch () {
     let time = 0
-    const padNum = (x, amount) => x.toString().padStart(amount, '0')
+    let isStopped = false
     return {
         inSeconds () {
             return time / 1000
@@ -34,10 +41,14 @@ function stopwatch () {
             return time
         },
         addSeconds (dt) {
-            time += dt * 1000
+            if (!isStopped) {
+                time += dt * 1000
+            }
         },
         addMilliseconds (dt) {
-            time += dt
+            if (!isStopped) {
+                time += dt
+            }
         },
         clear () {
             time = 0
@@ -46,9 +57,34 @@ function stopwatch () {
             return time / (1000 * 60)
         },
         toString () {
-            const minutes = Math.floor(time / (1000 * 60))
-            const seconds = (time - minutes * 60 * 1000) / (1000)
-            return padNum(minutes, 2) + ':' + padNum(seconds.toFixed(2), 5)
+            return formatTime(time)
+        },
+        stop () {
+            isStopped = true
+        },
+        start () {
+            isStopped = false
         }
     }
+}
+
+/**
+ * Return the game data from local storage.
+ */
+function getGameData () {
+    return JSON.parse(window.localStorage.getItem('gameData')) || {}
+}
+
+function setGameData (data) {
+    window.localStorage.setItem('gameData', JSON.stringify(data))
+}
+
+function getHighScore () {
+    return getGameData().highScore || 0
+}
+
+function setHighScore (score) {
+    const gameData = getGameData()
+    gameData.highScore = score
+    setGameData(gameData)
 }
