@@ -7,6 +7,30 @@ class Play extends Phaser.Scene {
         this.playTime = stopwatch()
 
         this.anims.create({
+            key: 'tentacles1',
+            frames: this.anims.generateFrameNames('tentacles', {
+                start: 1,
+                end: 10,
+                zeroPad: 2,
+                prefix: 'tent1_'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'tentacles2',
+            frames: this.anims.generateFrameNames('tentacles', {
+                start: 1,
+                end: 8,
+                zeroPad: 2,
+                prefix: 'tent2_'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
             key: 'player_run',
             frames: this.anims.generateFrameNames('player', {
                 start: 1,
