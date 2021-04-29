@@ -146,25 +146,29 @@ class Play extends Phaser.Scene {
             });
         }
         addObstacleTimer()
-
       
         //let timeScore = this.time.now; -- this is for changing difficulty later
 
         //display time
         let timeConfig = {
-            fontFamily: 'Comic Sans MS',
-            fontSize: '100 px',
-            backgroundColor: '#000000',
+            fontFamily: 'monospace',
+            fontSize: '32px',
             color: '#FFFFFF',
             align: 'center',
+            fontStyle: 'bold',
             padding: {
                 top: 5,
                 bottom: 5,
             },
-            fixedWidth: 200
+            fixedWidth: 300
         }
         
-        this.timeDisplay = this.add.text(10, 10, 'Timer: 0', timeConfig)
+        this.timeDisplay = this.add.text(
+            game.config.width / 2,
+            10,
+            'Time: ' + this.playTime.toString(),
+            timeConfig
+        ).setOrigin(0.5, 0)
     }
 
     update(t, dt) {
@@ -184,7 +188,7 @@ class Play extends Phaser.Scene {
 
         //update clock
         this.playTime.addMilliseconds(dt)
-        this.timeDisplay.text = `Timer: ${this.playTime.inSeconds().toFixed(2)}`;
+        this.timeDisplay.text = 'Time: ' + this.playTime.toString()
     }
 
     killPlayer () {
@@ -193,9 +197,6 @@ class Play extends Phaser.Scene {
 
     generateObstacle() {
         const obstacle = new Obstacle(this);
-
-        //uncomment this so the player can collide with the obstacle
-        //this.physics.add.collider(this.player, obstacle);
         this.physics.add.overlap(this.player, obstacle, () => {
             this.killPlayer()
         })

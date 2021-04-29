@@ -25,6 +25,7 @@ function makeExplodeParticles (x, y, particles) {
 
 function stopwatch () {
     let time = 0
+    const padNum = (x, amount) => x.toString().padStart(amount, '0')
     return {
         inSeconds () {
             return time / 1000
@@ -40,6 +41,14 @@ function stopwatch () {
         },
         clear () {
             time = 0
+        },
+        inMinutes () {
+            return time / (1000 * 60)
+        },
+        toString () {
+            const minutes = Math.floor(time / (1000 * 60))
+            const seconds = (time - minutes * 60 * 1000) / (1000)
+            return padNum(minutes, 2) + ':' + padNum(seconds.toFixed(2), 5)
         }
     }
 }
