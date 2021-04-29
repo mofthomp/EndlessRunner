@@ -18,7 +18,7 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
         )
 
         const config = {
-            tint: 0xff1100,
+            tint: 0xaa11ff,
             lifespan: 250,
             maxParticles: 1000,
             frequency: 0,

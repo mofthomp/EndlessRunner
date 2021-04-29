@@ -1,6 +1,6 @@
 function makeExplodeParticles (x, y, particles) {
     const config = {
-        tint: 0xff1100,
+        tint: 0xaa11ff,
         lifespan: 250,
         maxParticles: 32,
         frequency: -1,
