@@ -122,6 +122,8 @@ class Play extends Phaser.Scene {
 
         this.physics.add.collider(this.ground, this.player);
 
+        this.explodeParticles = this.add.particles('soft');
+
         this.allObstacles = this.add.group({
             runChildUpdate: true
         });
@@ -179,8 +181,6 @@ class Play extends Phaser.Scene {
         ) {
             this.killPlayer()
         }
-
-        this.explodeParticles = this.add.particles('soft');
 
         //update clock
         this.playTime.addMilliseconds(dt)
