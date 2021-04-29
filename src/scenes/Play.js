@@ -67,6 +67,17 @@ class Play extends Phaser.Scene {
             frameRate: 15,
         })
 
+        this.anims.create({
+            key: 'demon_idle',
+            frames: this.anims.generateFrameNames('demon', {
+                start: 1,
+                end: 25,
+                prefix: 'sprite'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
 
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyF_dv = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
@@ -120,6 +131,14 @@ class Play extends Phaser.Scene {
             0
         )
 
+        this.pushTimer = 0;
+
+        this.demon = new Demon(this);
+
+        this.physics.add.overlap(this.player, this.demon, () => {
+            this.killPlayer()
+        })
+
         this.physics.add.collider(this.ground, this.player);
 
         this.explodeParticles = this.add.particles('soft');
@@ -172,6 +191,13 @@ class Play extends Phaser.Scene {
     }
 
     update(t, dt) {
+        if(this.pushTimer > 0) {
+            this.pushTimer -= 1;
+            this.demon.setVelocityX(50);
+        }else{
+            this.demon.setVelocityX(-10);
+        }
+
         this.player.update(t, dt);
 
         this.foreground.tilePositionX -= 7;

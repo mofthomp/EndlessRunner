@@ -18,6 +18,7 @@ class Menu extends Phaser.Scene {
             fixedWidth: 0
         }
 
+        this.sound.stopAll();
         this.sound.play('bgm_sting');
 
         this.add.text(

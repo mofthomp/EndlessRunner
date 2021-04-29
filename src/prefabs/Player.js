@@ -18,7 +18,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.setSize(this.width - 12, this.height - 4)
 
         /* How many milliseconds before you can shoot again. */
-        this.maxCooldown = 5000
+        this.maxCooldown = 2500
         this.cooldown = 0
     }
 

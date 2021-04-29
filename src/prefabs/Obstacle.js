@@ -25,6 +25,7 @@ class Obstacle extends Phaser.Physics.Arcade.Sprite {
     }
 
     takeDamage () {
+        this.scene.pushTimer = 30;
         makeExplodeParticles(this.x, this.y, this.scene.explodeParticles)
         this.destroy()
     }

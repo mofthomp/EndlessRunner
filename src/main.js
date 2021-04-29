@@ -6,7 +6,7 @@ const game = new Phaser.Game({
     default: 'arcade',
     arcade: {
       gravity: { y: 750 },
-      debug: false
+      debug: true
     }
   },
   scene: [load, Menu, Play, Lose, Credits, Tutorial]
