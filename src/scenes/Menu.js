@@ -7,6 +7,14 @@ class Menu extends Phaser.Scene {
         this.load.audio('bgm_sting', './assets/intro_sting.mp3');
         this.load.audio('bgm_play', './assets/chase_theme.mp3');
         this.load.audio('bgm_death', './assets/death_jingle.mp3');
+        this.load.audio('sfx_explosion_1', './assets/explosion1.wav');
+        this.load.audio('sfx_explosion_2', './assets/explosion2.wav');
+        this.load.audio('sfx_explosion_3', './assets/explosion3.wav');
+        this.load.audio('sfx_roar_1', './assets/roar1.wav');
+        this.load.audio('sfx_roar_2', './assets/roar2.wav');
+        this.load.audio('sfx_roar_3', './assets/roar3.wav');
+        this.load.audio('sfx_jump', './assets/jump.wav');
+        this.load.audio('sfx_shoot', './assets/shoot.wav');
     }
 
     create() {

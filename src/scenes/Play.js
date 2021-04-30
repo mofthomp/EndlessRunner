@@ -131,7 +131,9 @@ class Play extends Phaser.Scene {
             0
         )
 
+        // timing elements
         this.pushTimer = 0;
+        this.danger = 0;
 
         this.demon = new Demon(this);
         this.demon.play('demon_idle')
@@ -197,11 +199,14 @@ class Play extends Phaser.Scene {
     }
 
     update(t, dt) {
+        // should the wall be moving back?
         if(this.pushTimer > 0) {
             this.pushTimer -= 1;
             this.demon.setVelocityX(50);
+            this.danger -= 5;
         }else{
             this.demon.setVelocityX(-10);
+            this.danger += 1;
         }
 
         this.player.update(t, dt);

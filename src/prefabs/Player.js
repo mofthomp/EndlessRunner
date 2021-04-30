@@ -18,7 +18,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.setSize(this.width - 12, this.height - 4)
 
         /* How many milliseconds before you can shoot again. */
-        this.maxCooldown = 2500
+        this.maxCooldown = 4000
         this.cooldown = 0
     }
 
@@ -52,6 +52,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if((keyJump.isDown || keyUp.isDown) && this.body.touching.down) {
             // Play jump animation.
             this.play('player_jump')
+            this.scene.sound.play('sfx_jump');
             this.setVelocityY(-500);
         }
 
@@ -79,7 +80,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     fire () {
+        this.scene.sound.play('sfx_shoot');
         new Projectile(this.scene, this.x, this.y);
-        this.cooldown = this.maxCooldown;
+        this.cooldown = this.maxCooldown - (this.scene.danger); // the projectile can be fired faster when you're in more danger!
     }
 }
