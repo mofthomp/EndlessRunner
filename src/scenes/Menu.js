@@ -23,14 +23,23 @@ class Menu extends Phaser.Scene {
 
         this.add.text(
             game.config.width / 2, 
+            game.config.height / 2 - 128, 
+            'Hubris',
+            {
+                ...menuConfig,
+                fontStyle: 'bold'
+            }
+        ).setOrigin(0.5);
+        this.add.text(
+            game.config.width / 2, 
             game.config.height / 2, 
-            'This is a temp menu',
+            'Press → to Start',
             menuConfig
         ).setOrigin(0.5);
         this.add.text(
             game.config.width / 2, 
-            game.config.height / 2 + 50, 
-            'Press -> to Start or <- for Credits',
+            game.config.height / 2 + 64, 
+            'Press ← for Credits',
             menuConfig
         ).setOrigin(0.5);
     }

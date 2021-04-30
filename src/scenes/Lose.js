@@ -25,26 +25,35 @@ class Lose extends Phaser.Scene {
 
         this.add.text(
             game.config.width / 2, 
-            game.config.height / 2, 
+            game.config.height / 2 - 128, 
             'You died! :(',
-            menuConfig
+            {
+                ...menuConfig,
+                fontStyle: 'bold'
+            }
         ).setOrigin(0.5);
         this.add.text(
             game.config.width / 2, 
-            game.config.height / 2 + 50, 
+            game.config.height / 2 - 32, 
             'Your score: ' + formatTime(playTimeInMilliseconds),
             menuConfig
         ).setOrigin(0.5);
         this.add.text(
             game.config.width / 2, 
-            game.config.height / 2 + 100, 
+            game.config.height / 2 + 32, 
             'Your best score: ' + formatTime(getHighScore()),
             menuConfig
         ).setOrigin(0.5);
         this.add.text(
             game.config.width / 2, 
-            game.config.height / 2 + 150, 
-            'Press Q to Restart or F for Menu',
+            game.config.height / 2 + 128, 
+            'Press Q to Restart',
+            menuConfig
+        ).setOrigin(0.5);
+        this.add.text(
+            game.config.width / 2, 
+            game.config.height / 2 + 128 + 50, 
+            'Press F for Menu',
             menuConfig
         ).setOrigin(0.5);
     }
