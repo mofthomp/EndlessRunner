@@ -10,6 +10,7 @@ class Menu extends Phaser.Scene {
     }
 
     create() {
+        this.background = this.add.tileSprite(0, 0, 800, 600, 'title').setOrigin(0,0);
         keyLeftArrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRightArrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         let menuConfig = {
@@ -21,7 +22,7 @@ class Menu extends Phaser.Scene {
         this.sound.stopAll();
         this.sound.play('bgm_sting');
 
-        this.add.text(
+    /*this.add.text(
             game.config.width / 2, 
             game.config.height / 2 - 128, 
             'HUBRIS',
@@ -29,10 +30,10 @@ class Menu extends Phaser.Scene {
                 ...menuConfig,
                 fontStyle: 'bold'
             }
-        ).setOrigin(0.5);
+        ).setOrigin(0.5);*/
         this.add.text(
             game.config.width / 2, 
-            game.config.height / 2, 
+            game.config.height / 3 + 128, 
             'Press → to Start',
             menuConfig
         ).setOrigin(0.5);
