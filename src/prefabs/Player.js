@@ -52,6 +52,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if((keyJump.isDown || keyUp.isDown) && this.body.touching.down) {
             // Play jump animation.
             this.play('player_jump')
+            this.scene.sound.play('sfx_jump');
             this.setVelocityY(-500);
         }
 
@@ -79,7 +80,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     fire () {
+        this.scene.sound.play('sfx_shoot');
         new Projectile(this.scene, this.x, this.y);
-        this.cooldown = this.maxCooldown;
+        this.cooldown = this.maxCooldown - (this.scene.danger/2); // the projectile can be fired faster when you're in more danger!
     }
 }

@@ -25,8 +25,19 @@ class Obstacle extends Phaser.Physics.Arcade.Sprite {
     }
 
     takeDamage () {
+        let rando = Phaser.Math.Between(1, 3);
+        if(rando == 1){
+            this.scene.sound.play('sfx_explosion_1');
+            this.scene.sound.play('sfx_roar_1');
+        } else if (rando == 2){
+            this.scene.sound.play('sfx_explosion_2');
+            this.scene.sound.play('sfx_roar_2');
+        } else {
+            this.scene.sound.play('sfx_explosion_3');
+            this.scene.sound.play('sfx_roar_3');
+        }
         this.scene.pushTimer = 30;
-        makeExplodeParticles(this.x, this.y, this.scene.explodeParticles)
-        this.destroy()
+        makeExplodeParticles(this.x, this.y, this.scene.explodeParticles);
+        this.destroy();
     }
 }
