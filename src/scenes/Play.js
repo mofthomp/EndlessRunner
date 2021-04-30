@@ -7,6 +7,29 @@ class Play extends Phaser.Scene {
         this.playTime = stopwatch()
 
         this.anims.create({
+            key: 'spinner',
+            frames: this.anims.generateFrameNumbers('spinner', {
+                start: 0,
+                end: 63,
+                first: 0
+            }),
+            frameRate: 15,
+            repeat: 0
+        })
+
+        this.anims.create({
+            key: 'tentacles1',
+            frames: this.anims.generateFrameNames('tentacles', {
+                start: 1,
+                end: 10,
+                zeroPad: 2,
+                prefix: 'tent1_'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
             key: 'tentacles1',
             frames: this.anims.generateFrameNames('tentacles', {
                 start: 1,

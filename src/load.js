@@ -6,6 +6,12 @@ class load extends Phaser.Scene {
     preload() {
         this.load.atlas('player', './assets/spritesheet.png', './assets/spritesheet.json')
         this.load.image('soft', './assets/soft.png');
+        this.load.spritesheet('spinner', './assets/spinner.png', {
+          frameWidth: 32,
+          frameHeight: 32,
+          startFrame: 0,
+          endFrame: 63
+        });
         this.load.image('ground', './assets/ground.png');
         this.load.image('screenedge', './assets/screenedge.png');
         this.load.atlas('tentacles', './assets/tentacles.png', './assets/tentacles.json')

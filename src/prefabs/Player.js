@@ -1,11 +1,13 @@
 class Player extends Phaser.Physics.Arcade.Sprite {
+  l
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
 
-        this.cooldownIndicator = scene.add.text(x, y, '').setOrigin(0.5, 0.5)
+        this.cooldownIndicator = scene.add.sprite(x, y, 'spinner', 0)
+        this.cooldownIndicator.setOrigin(0.5, 0.5)
 
         //this.setCollideWorldBounds(true);
         this.jumping = false;
@@ -20,6 +22,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         /* How many milliseconds before you can shoot again. */
         this.maxCooldown = 4000
         this.cooldown = 0
+        this.startCooldown = 0
     }
 
     update(t, dt) {
@@ -68,11 +71,16 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             }
         } else {
             this.cooldownIndicator.visible = true;
+            this.cooldownIndicator.x = this.x;
+            this.cooldownIndicator.y = this.y - 64;
+            const t = this.cooldown / this.startCooldown
+            this.cooldownIndicator.setFrame(63 - Math.floor(63 * t))
+            /* Add pulsing animation to indicator. */
+            this.cooldownIndicator.setAlpha(
+              0.75 + Math.cos(t * Math.PI * 16) * 0.25
+            )
             this.cooldown -= dt;
-            this.cooldownIndicator.text = (this.cooldown / 1000).toFixed(2);
         }
-        this.cooldownIndicator.x = this.x;
-        this.cooldownIndicator.y = this.y - 64;
     }
 
     checkVelo(veloX) {
@@ -83,5 +91,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.scene.sound.play('sfx_shoot');
         new Projectile(this.scene, this.x, this.y);
         this.cooldown = this.maxCooldown - (this.scene.danger); // the projectile can be fired faster when you're in more danger!
+        this.startCooldown = this.cooldown
     }
 }
