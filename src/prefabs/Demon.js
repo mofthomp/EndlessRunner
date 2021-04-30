@@ -12,12 +12,5 @@ class Demon extends Phaser.Physics.Arcade.Sprite {
         this.setImmovable();
         /* Adjust physics size. */
         this.setSize(this.width-50, this.height)
-
-        this.animation = ['demon_idle']
-    }
-
-    update() {
-        this.play(this.animation, true)
-        //console.log(this.body.velocity.x);
     }
 }

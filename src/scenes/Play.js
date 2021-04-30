@@ -134,6 +134,7 @@ class Play extends Phaser.Scene {
         this.pushTimer = 0;
 
         this.demon = new Demon(this);
+        this.demon.play('demon_idle')
 
         this.physics.add.overlap(this.player, this.demon, () => {
             this.killPlayer()
