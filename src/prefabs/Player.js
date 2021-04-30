@@ -82,6 +82,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     fire () {
         this.scene.sound.play('sfx_shoot');
         new Projectile(this.scene, this.x, this.y);
-        this.cooldown = this.maxCooldown - (this.scene.danger*2); // the projectile can be fired faster when you're in more danger!
+        this.cooldown = this.maxCooldown - (this.scene.danger); // the projectile can be fired faster when you're in more danger!
     }
 }
