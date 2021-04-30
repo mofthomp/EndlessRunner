@@ -4,6 +4,7 @@ class Lose extends Phaser.Scene {
     }
 
     create (data) {
+        this.background = this.add.tileSprite(0, 0, 800, 600, 'deathscreen').setOrigin(0,0);
         const { playTimeInMilliseconds } = data
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyF_dv = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
@@ -25,8 +26,8 @@ class Lose extends Phaser.Scene {
 
         this.add.text(
             game.config.width / 2, 
-            game.config.height / 2 - 128, 
-            'You died! :(',
+            game.config.height / 3 - 96, 
+            'YOU HAVE MET YOUR DEMISE',
             {
                 ...menuConfig,
                 fontStyle: 'bold'
@@ -34,25 +35,25 @@ class Lose extends Phaser.Scene {
         ).setOrigin(0.5);
         this.add.text(
             game.config.width / 2, 
-            game.config.height / 2 - 32, 
+            game.config.height / 3, 
             'Your score: ' + formatTime(playTimeInMilliseconds),
             menuConfig
         ).setOrigin(0.5);
         this.add.text(
             game.config.width / 2, 
-            game.config.height / 2 + 32, 
+            game.config.height / 3 + 32, 
             'Your best score: ' + formatTime(getHighScore()),
             menuConfig
         ).setOrigin(0.5);
         this.add.text(
             game.config.width / 2, 
-            game.config.height / 2 + 128, 
+            game.config.height / 3 + 96, 
             'Press Q to Restart',
             menuConfig
         ).setOrigin(0.5);
         this.add.text(
             game.config.width / 2, 
-            game.config.height / 2 + 128 + 50, 
+            game.config.height / 3 + 128, 
             'Press F for Menu',
             menuConfig
         ).setOrigin(0.5);
