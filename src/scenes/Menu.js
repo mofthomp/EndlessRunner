@@ -24,7 +24,7 @@ class Menu extends Phaser.Scene {
         this.add.text(
             game.config.width / 2, 
             game.config.height / 2 - 128, 
-            'Hubris',
+            'HUBRIS',
             {
                 ...menuConfig,
                 fontStyle: 'bold'
