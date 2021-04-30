@@ -189,6 +189,11 @@ class Play extends Phaser.Scene {
             'Time: ' + this.playTime.toString(),
             timeConfig
         ).setOrigin(0.5, 0)
+
+        // Kill the player if they collide with an obstacle
+        this.physics.add.overlap(this.player, this.allObstacles, () => {
+            this.killPlayer()
+        })
     }
 
     update(t, dt) {
@@ -226,9 +231,6 @@ class Play extends Phaser.Scene {
 
     generateObstacle() {
         const obstacle = new Obstacle(this);
-        this.physics.add.overlap(this.player, obstacle, () => {
-            this.killPlayer()
-        })
         this.allObstacles.add(obstacle);
     }
 }
