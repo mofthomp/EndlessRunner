@@ -117,7 +117,7 @@ class Play extends Phaser.Scene {
             game.config.width,
             game.config.height,
             'background'
-        ).setOrigin(0, 0);
+        ).setPipeline('Light2D').setOrigin(0, 0);
 
         this.foreground = this.add.tileSprite(
             0,
@@ -125,14 +125,14 @@ class Play extends Phaser.Scene {
             game.config.width,
             game.config.height,
             'foreground'
-        ).setOrigin(0, 0);
+        ).setPipeline('Light2D').setOrigin(0, 0);
 
         //change to sprite if ground needs to be animated
         this.ground = this.physics.add.image(
             game.config.width / 2,
             game.config.height + 4,
             'ground'
-        ).setOrigin(0.5,1.0);
+        ).setPipeline('Light2D').setOrigin(0.5,1.0);
         this.ground.body.allowGravity = false
         this.ground.setImmovable(true);
         
@@ -144,7 +144,7 @@ class Play extends Phaser.Scene {
             game.config.width,
             this.ground.height,
             'ground'
-        ).setOrigin(0.5,1.0);
+        ).setPipeline('Light2D').setOrigin(0.5,1.0);
 
         this.player = new Player(
             this,
@@ -152,7 +152,7 @@ class Play extends Phaser.Scene {
             400,
             'player',
             0
-        )
+        ).setPipeline('Light2D')
 
         // timing elements
         this.pushTimer = 0;
@@ -219,9 +219,18 @@ class Play extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.allObstacles, () => {
             this.killPlayer()
         })
+
+        this.lights.enable();
+        this.lights.setAmbientColor("0xFFFFFF");
+
+        this.spotlight = this.lights.addLight(this.player.x, this.player.y, 400).setIntensity(0);
     }
 
     update(t, dt) {
+        //this makes spotlight follow player
+        this.spotlight.x = this.player.x;
+        this.spotlight.y = this.player.y;
+
         // should the wall be moving back?
         if(this.pushTimer > 0) {
             this.pushTimer -= 1;
@@ -249,6 +258,11 @@ class Play extends Phaser.Scene {
         //update clock
         this.playTime.addMilliseconds(dt)
         this.timeDisplay.text = 'Time: ' + this.playTime.toString()
+
+        let x = 256 - Math.round(Math.log10(this.playTime.inSeconds() + 1) * 64);
+        document.body.style.background=`rgb(${x}, ${x}, ${x})`;
+
+        this.setColor(x);
     }
 
     killPlayer () {
@@ -260,5 +274,11 @@ class Play extends Phaser.Scene {
     generateObstacle() {
         const obstacle = new Obstacle(this);
         this.allObstacles.add(obstacle);
+    }
+
+    setColor(x) {
+        let hex = x.toString(16);
+        this.lights.setAmbientColor(`0x${hex}${hex}${hex}`);
+        this.spotlight.setIntensity(1 - x/256);
     }
 }
