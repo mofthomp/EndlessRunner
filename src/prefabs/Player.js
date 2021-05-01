@@ -1,5 +1,4 @@
 class Player extends Phaser.Physics.Arcade.Sprite {
-  l
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
 

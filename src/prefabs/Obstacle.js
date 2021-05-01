@@ -1,10 +1,15 @@
 class Obstacle extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene) {
-        super(scene, -128, 480, 'tentacles');
+    constructor(scene, texture, destructable) {
+        super(scene, -128, 480, texture);
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.scene = scene
+
+        //remove this after adding the right size image for indestructable obstacle
+        if(!destructable) {
+            this.setScale(1.7);
+        }
 
         //change this to change speed
         this.setVelocityX(300);
@@ -13,11 +18,19 @@ class Obstacle extends Phaser.Physics.Arcade.Sprite {
         /* Adjust physics size. */
         this.setSize(this.width / 2, this.height - 4)
 
-        this.animation = ['tentacles1', 'tentacles2'][Math.round(Math.random())]
+        this.destructable = destructable
+
+        this.animation = 
+            (this.destructable) ? 
+                ['tentacles1', 'tentacles2'][Math.round(Math.random())] : 'tentacles1';
+                                                                            //^Not sure if we need animation for indestructable 
+                                                                            //obstacle but if we need just put it here
     }
 
     update() {
-        this.play(this.animation, true)
+        if(this.destructable) {
+            this.play(this.animation, true)
+        }
         //console.log(this.body.velocity.x);
         if(this.x > (game.config.width + this.width)) {
             this.destroy();

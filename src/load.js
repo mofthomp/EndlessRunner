@@ -21,6 +21,7 @@ class load extends Phaser.Scene {
         this.load.atlas('demon', './assets/demon.png', './assets/demon.json');
         this.load.image('deathscreen', './assets/deathscreen.png');
         this.load.image('title', './assets/titlescreen.png')
+        this.load.image('rock', './assets/rock.png')
     }
 
     create() {

@@ -8,11 +8,9 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
             this,
             scene.allObstacles,
             (object1, object2) => {
-                if (object1.takeDamage) {
-                    object1.takeDamage()
-                }
-                if (object2) {
-                    object2.takeDamage()
+                object1.takeDamage();
+                if(object2.destructable) {
+                    object2.takeDamage();
                 }
             }
         )

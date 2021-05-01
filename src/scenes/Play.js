@@ -30,18 +30,6 @@ class Play extends Phaser.Scene {
         })
 
         this.anims.create({
-            key: 'tentacles1',
-            frames: this.anims.generateFrameNames('tentacles', {
-                start: 1,
-                end: 10,
-                zeroPad: 2,
-                prefix: 'tent1_'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
             key: 'tentacles2',
             frames: this.anims.generateFrameNames('tentacles', {
                 start: 1,
@@ -272,7 +260,8 @@ class Play extends Phaser.Scene {
     }
 
     generateObstacle() {
-        const obstacle = new Obstacle(this);
+        let destructable = (Math.round(Math.random() * 10) > 3) ? true : false;
+        const obstacle = new Obstacle(this, (destructable) ? 'tentacle' : 'rock', destructable);
         this.allObstacles.add(obstacle);
     }
 
