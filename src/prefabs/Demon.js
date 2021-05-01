@@ -5,6 +5,7 @@ class Demon extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.scene = scene
+        this.setDepth(10);
 
         //change this to change speed
         this.setVelocityX(-10);
