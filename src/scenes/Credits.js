@@ -57,6 +57,16 @@ create() {
     ).setOrigin(0.5);
     this.add.text(
         game.config.width / 2, 
+        game.config.height - game.config.height / 3,
+        'SFX sourced from freesound.org',
+        {
+            ...menuConfig,
+            fontSize: '24px',
+            
+        }
+    ).setOrigin(0.5);
+    this.add.text(
+        game.config.width / 2, 
         game.config.height - game.config.height / 3 + 64, 
         'Press -> to Start or <- for Menu',
         menuConfig
