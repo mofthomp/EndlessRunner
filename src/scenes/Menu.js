@@ -41,13 +41,13 @@ class Menu extends Phaser.Scene {
         ).setOrigin(0.5);*/
         this.add.text(
             game.config.width / 2, 
-            game.config.height / 3 + 128, 
+            game.config.height / 3+64, 
             'Press → to Start',
             menuConfig
         ).setOrigin(0.5);
         this.add.text(
             game.config.width / 2, 
-            game.config.height / 2 + 64, 
+            game.config.height / 3 + 128, 
             'Press ← for Credits',
             menuConfig
         ).setOrigin(0.5);
