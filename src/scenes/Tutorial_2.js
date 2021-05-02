@@ -1,6 +1,6 @@
-class Tutorial extends Phaser.Scene {
+class Tutorial_2 extends Phaser.Scene {
     constructor() {
-        super('tutScene');
+        super('tutScene2');
     }
 
     create() {
@@ -16,7 +16,7 @@ class Tutorial extends Phaser.Scene {
             'Press -> to Begin',
             menuConfig
         ).setOrigin(0.5);*/
-        this.background = this.add.tileSprite(0, 0, 800, 600, 'tut').setOrigin(0,0);
+        this.background = this.add.tileSprite(0, 0, 800, 600, 'tut2').setOrigin(0,0);
         
     }
 

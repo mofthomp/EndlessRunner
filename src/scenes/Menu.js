@@ -58,7 +58,7 @@ class Menu extends Phaser.Scene {
             /*game.settings = {
                 obstacleSpeed: 500
             }*/
-            this.scene.start('tutScene');
+            this.scene.start('tutScene1');
         }
         if(Phaser.Input.Keyboard.JustDown(keyLeftArrow)) {
             this.scene.start('creditScene');

@@ -10,7 +10,7 @@ const game = new Phaser.Game({
       debug: false
     }
   },
-  scene: [load, Menu, Play, Lose, Credits, Tutorial]
+  scene: [load, Menu, Play, Lose, Credits, Tutorial_1, Tutorial_2]
 })
 
 let keyQ, keyQ_dv, keyLeft, keyRight, keyJump, keyLeftArrow, keyRightArrow, keyUp, keyF, keyF_dv;
