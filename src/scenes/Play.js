@@ -260,9 +260,11 @@ class Play extends Phaser.Scene {
     }
 
     generateObstacle() {
-        let destructable = (Math.round(Math.random() * 10) > 3) ? true : false;
+        /* Do not create two indestructable obstacles in a row. */
+        let destructable = (Math.round(Math.random() * 10) > 3) || !this.lastObstacleWasDestructable;
         const obstacle = new Obstacle(this, (destructable) ? 'tentacle' : 'rock', destructable);
         this.allObstacles.add(obstacle);
+        this.lastObstacleWasDestructable = destructable
     }
 
     setColor(x) {
